@@ -1,0 +1,15 @@
+# JWKS secret value, for production usage regenerate this example 
+jwksSecret: |
+  {
+    "keys": [
+    ]
+  }
+
+jwksImage: "docker.io/webngt/jwks-endpoint:0.0.1"
+
+# redefine for other environment
+ingressHostName: checklist.webngt.com
+
+# if true generate istio crds
+# istio crds depend on cert-manager certificates deployed in release namespace !!!!
+useIstio: true
