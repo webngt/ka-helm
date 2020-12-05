@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-jwks-deployment
+  labels:
+    app: jwks-endpoint
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: jwks-endpoint
+  template:
+    metadata:
+      labels:
+        app: jwks-endpoint
+    spec:
+      containers:
+      - name: endpoint
+        image: {{ .Values.jwksImage }}
+        volumeMounts:
+        - name: config
+          mountPath: "/app/config"        
+        ports:
+        - containerPort: 3000
+      volumes:
+      - name: config
+        secret:
+          secretName: {{ .Release.Name }}-jwks-secret
+          items:
+          - key: secret.json
+            path: secret.json

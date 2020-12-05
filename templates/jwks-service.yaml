@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-jwks-service
+spec:
+  selector:
+    app: jwks-endpoint
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000

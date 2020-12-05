@@ -1,0 +1,38 @@
+{{ if .Values.useIstio }}
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: {{ .Release.Name }}-jwks-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - hosts:
+    - {{ .Values.ingressHostName }}
+    port:
+      name: https
+      number: 443
+      protocol: HTTPS
+    tls:
+      credentialName: cert-webngt-wildcard
+      mode: SIMPLE
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ .Release.Name }}-jwks-vs
+spec:
+  gateways:
+  - {{ .Release.Name }}-jwks-gateway
+  hosts:
+  - {{ .Values.ingressHostName }}
+  http:
+  - match:
+    - uri:
+        prefix: /jwks
+    route:
+    - destination:
+        host: {{ .Release.Name }}-jwks-service
+        port:
+          number: 80
+{{ end }}
