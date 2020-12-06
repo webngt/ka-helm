@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-results-config
+data:
+  config.json: |
+{{ .Values.resultsConfig | indent 4}}

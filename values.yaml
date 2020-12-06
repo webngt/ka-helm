@@ -11,9 +11,15 @@ tokenConfig: |
     "checklistIss": "https://checklist.webngt.com/jwks"
   }
 
+resultsConfig: |
+  {
+    "checklistIss": "https://checklist.webngt.com/jwks"
+  }
+
 
 jwksImage: "docker.io/webngt/jwks-endpoint:0.0.1"
 tokenImage: "docker.io/webngt/token-endpoint:0.0.2"
+resultsImage: "docker.io/webngt/ka-results-service:0.0.1"
 
 # redefine for other environment
 ingressHostName: checklist.webngt.com

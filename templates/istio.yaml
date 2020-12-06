@@ -54,4 +54,42 @@ spec:
         host: {{ .Release.Name }}-token-service
         port:
           number: 80
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ .Release.Name }}-save-vs
+spec:
+  gateways:
+  - {{ .Release.Name }}-gateway
+  hosts:
+  - {{ .Values.ingressHostName }}
+  http:
+  - match:
+    - uri:
+        prefix: /save
+    route:
+    - destination:
+        host: {{ .Release.Name }}-results-service
+        port:
+          number: 80
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ .Release.Name }}-report-vs
+spec:
+  gateways:
+  - {{ .Release.Name }}-gateway
+  hosts:
+  - {{ .Values.ingressHostName }}
+  http:
+  - match:
+    - uri:
+        prefix: /report
+    route:
+    - destination:
+        host: {{ .Release.Name }}-results-service
+        port:
+          number: 80
 {{ end }}
