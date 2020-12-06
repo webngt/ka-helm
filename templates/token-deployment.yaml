@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-token-deployment
+  labels:
+    app: token-endpoint
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: token-endpoint
+  template:
+    metadata:
+      labels:
+        app: token-endpoint
+    spec:
+      containers:
+      - name: endpoint
+        image: {{ .Values.tokenImage }}
+        volumeMounts:
+        - name: config
+          mountPath: "/app/config" 
+        - name: secrets
+          mountPath: "/app/secrets" 
+        ports:
+        - containerPort: 3000
+      volumes:
+      - name: secrets
+        secret:
+          secretName: {{ .Release.Name }}-jwks-secret
+          items:
+          - key: secret.json
+            path: secret.json
+      - name: config
+        configMap:
+          name: {{ .Release.Name }}-token-config
+          items:
+          - key: config.json
+            path: config.json
+

@@ -2,7 +2,7 @@
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
-  name: {{ .Release.Name }}-jwks-gateway
+  name: {{ .Release.Name }}-gateway
 spec:
   selector:
     istio: ingressgateway
@@ -23,7 +23,7 @@ metadata:
   name: {{ .Release.Name }}-jwks-vs
 spec:
   gateways:
-  - {{ .Release.Name }}-jwks-gateway
+  - {{ .Release.Name }}-gateway
   hosts:
   - {{ .Values.ingressHostName }}
   http:
@@ -33,6 +33,25 @@ spec:
     route:
     - destination:
         host: {{ .Release.Name }}-jwks-service
+        port:
+          number: 80
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ .Release.Name }}-token-vs
+spec:
+  gateways:
+  - {{ .Release.Name }}-gateway
+  hosts:
+  - {{ .Values.ingressHostName }}
+  http:
+  - match:
+    - uri:
+        prefix: /tokens
+    route:
+    - destination:
+        host: {{ .Release.Name }}-token-service
         port:
           number: 80
 {{ end }}

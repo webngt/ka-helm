@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-token-service
+spec:
+  selector:
+    app: token-endpoint
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
