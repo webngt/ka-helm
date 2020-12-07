@@ -1,4 +1,5 @@
 # JWKS secret value, for production usage regenerate this example 
+# use https://github.com/webngt/jwt-util to generate RSA secret jwks
 jwksSecret: |
   {
     "keys": [
@@ -8,12 +9,12 @@ jwksSecret: |
 tokenConfig: |
   {
     "ttl": "1h",
-    "checklistIss": "https://checklist.webngt.com/jwks"
+    "checklistIss": "https://example.com"
   }
 
 resultsConfig: |
   {
-    "checklistIss": "https://checklist.webngt.com/jwks"
+    "checklistIss": "https://example.com"
   }
 
 resultsSecret: |
