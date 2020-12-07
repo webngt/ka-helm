@@ -13,6 +13,10 @@ spec:
     metadata:
       labels:
         app: jwks-endpoint
+{{ if .Values.useIstio }}
+      annotations:
+        sidecar.istio.io/rewriteAppHTTPProbers: "false"      
+{{ end }}
     spec:
       containers:
       - name: endpoint
@@ -22,6 +26,14 @@ spec:
           mountPath: "/app/config"        
         ports:
         - containerPort: 3000
+        livenessProbe:
+          httpGet:
+            path: /live
+            port: 3000
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 3000
       volumes:
       - name: config
         secret:

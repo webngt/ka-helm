@@ -13,6 +13,10 @@ spec:
     metadata:
       labels:
         app: token-endpoint
+{{ if .Values.useIstio }}
+      annotations:
+        sidecar.istio.io/rewriteAppHTTPProbers: "false"      
+{{ end }}
     spec:
       containers:
       - name: endpoint
@@ -24,6 +28,14 @@ spec:
           mountPath: "/app/secrets" 
         ports:
         - containerPort: 3000
+        livenessProbe:
+          httpGet:
+            path: /live
+            port: 3000
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 3000
       volumes:
       - name: secrets
         secret:

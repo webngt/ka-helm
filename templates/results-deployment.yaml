@@ -13,8 +13,10 @@ spec:
     metadata:
       labels:
         app: results-endpoint
+{{ if .Values.useIstio }}
       annotations:
         sidecar.istio.io/rewriteAppHTTPProbers: "false"      
+{{ end }}
     spec:
       containers:
       - name: endpoint
@@ -22,8 +24,8 @@ spec:
         volumeMounts:
         - name: config
           mountPath: "/app/config" 
-        # - name: secrets
-        #   mountPath: "/app/secrets" 
+        - name: secrets
+          mountPath: "/app/secrets" 
         ports:
         - containerPort: 3000
         livenessProbe:
@@ -35,12 +37,12 @@ spec:
             path: /ready
             port: 3000
       volumes:
-      # - name: secrets
-      #   secret:
-      #     secretName: {{ .Release.Name }}-jwks-secret
-      #     items:
-      #     - key: secret.json
-      #       path: secret.json
+      - name: secrets
+        secret:
+          secretName: {{ .Release.Name }}-results-secret
+          items:
+          - key: secrets.json
+            path: secrets.json
       - name: config
         configMap:
           name: {{ .Release.Name }}-results-config

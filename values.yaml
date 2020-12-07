@@ -16,10 +16,15 @@ resultsConfig: |
     "checklistIss": "https://checklist.webngt.com/jwks"
   }
 
+resultsSecret: |
+  {
+    "db_url": "postgres://checklist_user:password@example.com:5432/checklist"
+  }
 
-jwksImage: "docker.io/webngt/jwks-endpoint:0.0.1"
-tokenImage: "docker.io/webngt/token-endpoint:0.0.2"
-resultsImage: "docker.io/webngt/ka-results-service:0.0.1"
+
+jwksImage: "docker.io/webngt/jwks-endpoint:0.0.2"
+tokenImage: "docker.io/webngt/token-endpoint:0.0.3"
+resultsImage: "docker.io/webngt/ka-results-service:0.0.5"
 
 # redefine for other environment
 ingressHostName: checklist.webngt.com
