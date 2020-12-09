@@ -4,12 +4,13 @@ Before running this chart please carefully read notes below
 
 ## Secrets notes
 
-Create `secrets/` directory inside this chart's directory. 
+Create `secrets/` directory inside this chart's directory.
 
 Direcory structure:
 
 * `jwks.json` with valid rsa jwks json inside
 * `db.json` with postgres connect string in the following format
+
     ```json
     {
         "db_url": "postgres://user:password@host:port/dbname"
