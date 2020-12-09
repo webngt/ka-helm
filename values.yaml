@@ -1,33 +1,21 @@
-# JWKS secret value, for production usage regenerate this example 
-# use https://github.com/webngt/jwt-util to generate RSA secret jwks
-jwksSecret: |
-  {
-    "keys": [
-    ]
-  }
-
+# change checklistIss to your domain value
 tokenConfig: |
   {
     "ttl": "1h",
     "checklistIss": "https://example.com"
   }
 
+# change checklistIss to your domain value
 resultsConfig: |
   {
     "checklistIss": "https://example.com"
   }
 
-resultsSecret: |
-  {
-    "db_url": "postgres://checklist_user:password@example.com:5432/checklist"
-  }
-
-
 jwksImage: "docker.io/webngt/jwks-endpoint:0.0.2"
 tokenImage: "docker.io/webngt/token-endpoint:0.0.3"
 resultsImage: "docker.io/webngt/ka-results-service:0.0.5"
 
-# redefine for other environment
+# redefine for your environment
 ingressHostName: checklist.webngt.com
 
 # if true generate istio crds
