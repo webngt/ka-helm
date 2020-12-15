@@ -1,19 +1,11 @@
 # change checklistIss to your domain value
 tokenConfig: |
   {
-    "ttl": "1h",
-    "checklistIss": "https://example.com"
+    "ttl": "1h"
   }
 
-# change checklistIss to your domain value
-resultsConfig: |
-  {
-    "checklistIss": "https://example.com"
-  }
-
-jwksImage: "docker.io/webngt/jwks-endpoint:0.0.2"
-tokenImage: "docker.io/webngt/token-endpoint:0.0.3"
-resultsImage: "docker.io/webngt/ka-results-service:0.0.5"
+tokenImage: "docker.io/webngt/token-endpoint:0.0.4"
+resultsImage: "docker.io/webngt/ka-results-service:0.0.12"
 
 # redefine for your environment
 ingressHostName: checklist.webngt.com

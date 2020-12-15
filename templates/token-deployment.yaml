@@ -23,7 +23,7 @@ spec:
         image: {{ .Values.tokenImage }}
         volumeMounts:
         - name: config
-          mountPath: "/app/config" 
+          mountPath: "/app/config"
         - name: secrets
           mountPath: "/app/secrets" 
         ports:
@@ -39,10 +39,10 @@ spec:
       volumes:
       - name: secrets
         secret:
-          secretName: {{ .Release.Name }}-jwks-secret
+          secretName: {{ .Release.Name }}-token-secret
           items:
-          - key: secret.json
-            path: secret.json
+          - key: keys.json
+            path: keys.json
       - name: config
         configMap:
           name: {{ .Release.Name }}-token-config

@@ -5,7 +5,7 @@ metadata:
   labels:
     app: results-endpoint
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: results-endpoint
@@ -22,8 +22,6 @@ spec:
       - name: endpoint
         image: {{ .Values.resultsImage }}
         volumeMounts:
-        - name: config
-          mountPath: "/app/config" 
         - name: secrets
           mountPath: "/app/secrets" 
         ports:
@@ -41,12 +39,8 @@ spec:
         secret:
           secretName: {{ .Release.Name }}-results-secret
           items:
-          - key: secrets.json
-            path: secrets.json
-      - name: config
-        configMap:
-          name: {{ .Release.Name }}-results-config
-          items:
-          - key: config.json
-            path: config.json
+          - key: db.json
+            path: db.json
+          - key: keys.json
+            path: keys.json
 

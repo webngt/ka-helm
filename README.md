@@ -6,9 +6,9 @@ Before running this chart please carefully read notes below
 
 Create `secrets/` directory inside this chart's directory.
 
-Direcory structure:
+Directory structure:
 
-* `jwks.json` with valid rsa jwks json inside
+* `keys.json` with valid rsa jwks json inside, with `"use": "enc"` set.
 * `db.json` with postgres connect string in the following format
 
     ```json

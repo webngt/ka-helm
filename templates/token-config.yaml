@@ -4,4 +4,4 @@ metadata:
   name: {{ .Release.Name }}-token-config
 data:
   config.json: |
-{{ .Values.tokenConfig | indent 4}}
+{{ .Values.tokenConfig | indent 4 }}
