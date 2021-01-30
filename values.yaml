@@ -4,8 +4,8 @@ tokenConfig: |
     "ttl": "1h"
   }
 
-tokenImage: "docker.io/webngt/token-endpoint:0.0.4"
-resultsImage: "docker.io/webngt/ka-results-service:0.0.12"
+tokenImage: "docker.io/webngt/token-endpoint:0.0.6"
+resultsImage: "docker.io/webngt/ka-results-service:0.0.20"
 
 # redefine for your environment
 ingressHostName: checklist.webngt.com
